@@ -20,8 +20,8 @@ from common import clock, draw_str
 
 
 
-CAMERANUM=2  # cambiar aqui el numero de la camara
-show_params=True #modo verboso en pantalla
+CAMERANUM=1  # cambiar aqui el numero de la camara
+show_params=False #modo verboso en pantalla
 
 focusTB=False
 focusTrackBar=False
