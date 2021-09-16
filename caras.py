@@ -20,19 +20,19 @@ from common import clock, draw_str
 
 
 
-CAMERANUM=1  # cambiar aqui el numero de la camara
-show_params=False #modo verboso en pantalla
+CAMERANUM=0  # cambiar aqui el numero de la camara
+show_params=True #modo verboso en pantalla
 
 focusTB=False
 focusTrackBar=False
 
-FullScreen=True
+FullScreen=False
 
 detectar=5
 fps=30
 segundosTTL=2
 TTL=round((fps/detectar)*segundosTTL)
-scale=3
+scale=1
 ID=0
 dt=0
 dt2=0
@@ -179,7 +179,7 @@ else:
             
             if show_params:
                 draw_rects(vis, np.array(boxes, dtype=np.int32), (255, 255, 255),scale)
-                multiTracker.drawPaths(vis)
+                multiTracker.drawPaths(vis,scale=scale)
             ID=multiTracker.procesDetections(imglR,ret,ID,TTL=TTL)
             
         else:
