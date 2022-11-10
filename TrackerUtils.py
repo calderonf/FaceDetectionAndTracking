@@ -35,7 +35,7 @@ def createTrackerByName(tracker_type):
     elif tracker_type == 'GOTURN':
         tracker = cv2.TrackerGOTURN_create()
     elif tracker_type == 'MOSSE':
-        tracker = cv2.TrackerMOSSE_create()
+        tracker = cv2.legacy_TrackerMOSSE.create() # nota se añade legacy.
     elif tracker_type == "CSRT":
         tracker = cv2.TrackerCSRT_create()
     else:

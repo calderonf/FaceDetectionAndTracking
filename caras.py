@@ -20,7 +20,7 @@ from common import clock, draw_str
 
 
 
-CAMERANUM=0  # cambiar aqui el numero de la camara
+CAMERANUM=1  # cambiar aqui el numero de la camara
 show_params=True #modo verboso en pantalla
 
 focusTB=False
@@ -28,14 +28,14 @@ focusTrackBar=False
 
 FullScreen=False
 
-detectar=5
-fps=30
-segundosTTL=2
-TTL=round((fps/detectar)*segundosTTL)
-scale=1
-ID=0
-dt=0
-dt2=0
+detectar=5                              # cada cuantos cuadros se corre el mètodo de detecciòn del nuevo frame
+fps=30                                  # cuadros por segundo de la càmara 
+segundosTTL=2                           # Time to live en segundos
+TTL=round((fps/detectar)*segundosTTL)   #calculo del TTL en unidades de detección
+scale=2                                 # escala usada para graficar los rectangulos, el mètodo corre en ua resoluciòn más baja
+ID=0                                    #
+dt=0                                    #
+dt2=0                                   #
 
 
 
