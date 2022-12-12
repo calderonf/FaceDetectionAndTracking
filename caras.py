@@ -15,6 +15,7 @@ import platform
 import numpy as np
 import cv2
 import math
+import time
 
 from common import clock, draw_str
 
@@ -26,13 +27,13 @@ show_params=True #modo verboso en pantalla
 focusTB=False
 focusTrackBar=False
 
-FullScreen=False
+FullScreen=True
 
-detectar=5                              # cada cuantos cuadros se corre el mètodo de detecciòn del nuevo frame
+detectar=10                             # cada cuantos cuadros se corre el método de detecciòn del nuevo frame
 fps=30                                  # cuadros por segundo de la càmara 
 segundosTTL=2                           # Time to live en segundos
-TTL=round((fps/detectar)*segundosTTL)   #calculo del TTL en unidades de detección
-scale=2                                 # escala usada para graficar los rectangulos, el mètodo corre en ua resoluciòn más baja
+TTL=round((fps/detectar)*segundosTTL)   # calculo del TTL en unidades de detección
+scale=2                                 # escala usada para graficar los rectangulos, el mètodo corre en ua resolución más baja
 ID=0                                    #
 dt=0                                    #
 dt2=0                                   #
@@ -122,7 +123,7 @@ else:
 
     cascade = cv2.CascadeClassifier(cv2.samples.findFile(pathToData+cascade_fn))
     cascade2 = cv2.CascadeClassifier(cv2.samples.findFile(pathToData+nested_fn))
-    #cu.setMaxFPS(cap)
+    cu.setMaxFPS(cap)
     #cu.setMaxRes(cap)
     cu.setfourccmjpg(cap)
     cu.setRes1080pFPS30(cap)
@@ -131,6 +132,9 @@ else:
     fps,focus,fourcc,w,h=cu.getInfoCapture(cap)
     
     fotograma=0
+    prev_frame_time = time.time()
+    time.sleep(0.03)
+    new_frame_time = time.time()
     while True:
         _status, im = cap.read()
         if im is None:
@@ -158,6 +162,10 @@ else:
                 gray = cv2.cvtColor(imglR, cv2.COLOR_BGR2GRAY)
         
         if show_params:
+            new_frame_time = time.time()
+            fps = 1/(new_frame_time-prev_frame_time)
+            prev_frame_time = new_frame_time
+            fps = str(int(fps))
             cv2.putText(img, "Mode: {}".format(fourcc), (15, 40), font, 1.0, color)
             cv2.putText(img, "FPS: {}".format(fps), (15, 80), font, 1.0, color)
         
